@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Vocabulary - Kosakata Bahasa Inggris Interaktif</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #4CAF50; /* Warna hijau untuk header */
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav {
+            background-color: #333;
+            padding: 0.5em;
+            text-align: center;
+        }
+        nav button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        nav button:hover {
+            background-color: #777;
+        }
+        nav button.active {
+            background-color: #4CAF50; /* Warna tombol aktif */
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #ffffe0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #fffacd;
+        }
+        tr:hover {
+            background-color: #fff59d;
+        }
+        .action-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .action-button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        #about-section p, #quiz-section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .quiz-question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .quiz-options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+        }
+        #submitQuizBtn {
+            display: block;
+            margin: 20px auto;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        #submitQuizBtn:hover {
+            background-color: #0056b3;
+        }
+        #quiz-results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #333;
+            color: white;
+            margin-top: auto; /* Mendorong footer ke bawah */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Interactive English Vocabulary</h1>
+    </header>
+
+    <nav>
+        <button id="homeBtn" class="active">Home (Vocabulary)</button>
+        <button id="quizBtn">Quiz</button>
+        <button id="aboutBtn">About Me</button>
+    </nav>
+
+    <div class="container">
+        <section id="home-section">
+            <h2>Animal Vocabulary - Kosakata Hewan</h2>
+            <table id="vocabularyTable">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>English (Bahasa Inggris)</th>
+                        <th>Indonesian (Bahasa Indonesia)</th>
+                        <th>Pronunciation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </section>
+
+        <section id="quiz-section" class="hidden">
+            <h2>Vocabulary Quiz</h2>
+            <div id="quiz-container">
+                </div>
+            <button id="submitQuizBtn">Submit Quiz</button>
+            <div id="quiz-results"></div>
+        </section>
+
+        <section id="about-section" class="hidden">
+            <h2>About Me</h2>
+            <p><strong>Name:</strong> Kevinmaan</p>
+            <p><strong>NPM:</strong> 2240601027</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Interactive Vocabulary Learning</p>
+    </footer>
+
+    <script>
+        const vocabularyData = [
+            { no: 1, english: "Cat", indonesian: "Kucing" },
+            { no: 2, english: "Dog", indonesian: "Anjing" },
+            { no: 3, english: "Lion", indonesian: "Singa" },
+            { no: 4, english: "Tiger", indonesian: "Harimau" },
+            { no: 5, english: "Elephant", indonesian: "Gajah" },
+            { no: 6, english: "Monkey", indonesian: "Monyet" },
+            { no: 7, english: "Bird", indonesian: "Burung" },
+            { no: 8, english: "Fish", indonesian: "Ikan" },
+            { no: 9, english: "Snake", indonesian: "Ular" },
+            { no: 10, english: "Bear", indonesian: "Beruang" },
+            { no: 11, english: "Horse", indonesian: "Kuda" },
+            { no: 12, english: "Cow", indonesian: "Sapi" },
+            { no: 13, english: "Sheep", indonesian: "Domba" },
+            { no: 14, english: "Goat", indonesian: "Kambing" },
+            { no: 15, english: "Chicken", indonesian: "Ayam" },
+            { no: 16, english: "Duck", indonesian: "Bebek" },
+            { no: 17, english: "Rabbit", indonesian: "Kelinci" },
+            { no: 18, english: "Mouse", indonesian: "Tikus" },
+            { no: 19, english: "Frog", indonesian: "Katak" },
+            { no: 20, english: "Butterfly", indonesian: "Kupu-kupu" },
+            { no: 21, english: "Ant", indonesian: "Semut" },
+            { no: 22, english: "Bee", indonesian: "Lebah" },
+            { no: 23, english: "Spider", indonesian: "Laba-laba" },
+            { no: 24, english: "Turtle", indonesian: "Kura-kura" },
+            { no: 25, english: "Wolf", indonesian: "Serigala" }
+        ];
+
+        const quizData = [
+            {
+                question: "What is the Indonesian word for 'Elephant'?",
+                options: ["Monyet", "Gajah", "Singa", "Kuda"],
+                answer: "Gajah",
+                name: "q1"
+            },
+            {
+                question: "'Kelinci' is the Indonesian word for which animal?",
+                options: ["Rabbit", "Mouse", "Cat", "Frog"],
+                answer: "Rabbit",
+                name: "q2"
+            },
+            {
+                question: "Which of these means 'Ular' in English?",
+                options: ["Fish", "Bird", "Snake", "Bear"],
+                answer: "Snake",
+                name: "q3"
+            },
+            {
+                question: "Translate 'Tiger' to Indonesian.",
+                options: ["Serigala", "Harimau", "Kucing", "Anjing"],
+                answer: "Harimau",
+                name: "q4"
+            },
+            {
+                question: "What is 'Singa' in English?",
+                options: ["Wolf", "Tiger", "Lion", "Bear"],
+                answer: "Lion",
+                name: "q5"
+            }
+        ];
+
+        const homeBtn = document.getElementById('homeBtn');
+        const quizBtn = document.getElementById('quizBtn');
+        const aboutBtn = document.getElementById('aboutBtn');
+
+        const homeSection = document.getElementById('home-section');
+        const quizSection = document.getElementById('quiz-section');
+        const aboutSection = document.getElementById('about-section');
+
+        const vocabularyTableBody = document.getElementById('vocabularyTable').getElementsByTagName('tbody')[0];
+        const quizContainer = document.getElementById('quiz-container');
+        const submitQuizBtn = document.getElementById('submitQuizBtn');
+        const quizResultsDiv = document.getElementById('quiz-results');
+
+        // Function to speak text
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US'; // Set language to English
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Sorry, your browser does not support text-to-speech.');
+            }
+        }
+
+        // Populate vocabulary table
+        function populateVocabulary() {
+            vocabularyTableBody.innerHTML = ''; // Clear existing rows
+            vocabularyData.forEach(item => {
+                const row = vocabularyTableBody.insertRow();
+                row.insertCell().textContent = item.no + ".";
+                row.insertCell().textContent = item.english;
+                row.insertCell().textContent = item.indonesian;
+                const actionCell = row.insertCell();
+                const speakButton = document.createElement('button');
+                speakButton.textContent = '🔊 Play Sound';
+                speakButton.classList.add('action-button');
+                speakButton.onclick = () => speak(item.english);
+                actionCell.appendChild(speakButton);
+            });
+        }
+
+        // Populate quiz questions
+        function populateQuiz() {
+            quizContainer.innerHTML = ''; // Clear existing questions
+            quizResultsDiv.innerHTML = ''; // Clear previous results
+            quizData.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('quiz-question');
+                
+                const questionText = document.createElement('p');
+                questionText.textContent = `${index + 1}. ${q.question}`;
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.classList.add('quiz-options');
+                q.options.forEach(option => {
+                    const label = document.createElement('label');
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = q.name;
+                    radio.value = option;
+                    label.appendChild(radio);
+                    label.appendChild(document.createTextNode(` ${option}`));
+                    optionsDiv.appendChild(label);
+                });
+                questionDiv.appendChild(optionsDiv);
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        // Handle quiz submission
+        submitQuizBtn.addEventListener('click', () => {
+            let score = 0;
+            quizData.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.name}"]:checked`);
+                if (selectedOption && selectedOption.value === q.answer) {
+                    score++;
+                }
+            });
+            quizResultsDiv.textContent = `Your score: ${score} out of ${quizData.length}`;
+        });
+        
+        // Navigation logic
+        function showSection(sectionToShow) {
+            homeSection.classList.add('hidden');
+            quizSection.classList.add('hidden');
+            aboutSection.classList.add('hidden');
+            
+            homeBtn.classList.remove('active');
+            quizBtn.classList.remove('active');
+            aboutBtn.classList.remove('active');
+
+            sectionToShow.section.classList.remove('hidden');
+            sectionToShow.button.classList.add('active');
+        }
+
+        homeBtn.addEventListener('click', () => showSection({section: homeSection, button: homeBtn}));
+        quizBtn.addEventListener('click', () => {
+            populateQuiz(); // Repopulate quiz each time it's viewed to reset selections
+            showSection({section: quizSection, button: quizBtn});
+        });
+        aboutBtn.addEventListener('click', () => showSection({section: aboutSection, button: aboutBtn}));
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            populateVocabulary();
+            showSection({section: homeSection, button: homeBtn}); // Show home section by default
+        });
+
+    </script>
+
+</body>
+</html>
